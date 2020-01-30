@@ -63,7 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Camera Controllers\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Camera Controllers\CameraController2.cs" />
+    <Compile Include="Assets\Scripts\Camera Controllers\CameraController3.cs" />
     <Compile Include="Assets\Scripts\CollisionTarget.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\ProgressBar.cs" />
