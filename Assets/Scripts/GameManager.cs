@@ -13,9 +13,6 @@ public class GameManager : MonoBehaviour
     public float multiplier;
     public bool isDestroy = false;
 
-
-
-
     private void Start()
     {
         progressBar = GameObject.FindGameObjectWithTag("Aim").GetComponent<ProgressBar>();
