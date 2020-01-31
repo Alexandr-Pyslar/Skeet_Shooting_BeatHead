@@ -63,11 +63,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Scripts\CollisionTarget.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\ProgressBar.cs" />
-    <Compile Include="Assets\Scripts\Target.cs" />
+    <Compile Include="Assets\Scripts Games\CameraController.cs" />
+    <Compile Include="Assets\Scripts Games\CollisionTarget.cs" />
+    <Compile Include="Assets\Scripts Games\GameManager.cs" />
+    <Compile Include="Assets\Scripts Games\ProgressBar.cs" />
+    <Compile Include="Assets\Scripts Games\Target.cs" />
+    <Compile Include="Assets\Scripts Menu\MenuController.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/alexa/Documents/GitHub/Skeet_Shooting_BeatHead/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

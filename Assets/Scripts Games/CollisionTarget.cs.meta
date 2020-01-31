@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f9f44e35e6802d147828a14c0debfa12
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - platePrefab: {fileID: 7182100504380118323, guid: 6fd33080cc0a5254c9281968d09b116a,
+      type: 3}
+  - progressBar: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
