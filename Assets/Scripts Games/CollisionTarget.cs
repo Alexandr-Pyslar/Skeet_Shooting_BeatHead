@@ -5,7 +5,7 @@ using UnityEngine;
 public class CollisionTarget : MonoBehaviour
 {
     public bool isProgress = false;
-    public GameObject platePrefab;
+    //public GameObject platePrefab;
     public ProgressBar progressBar;
 
     void Start()

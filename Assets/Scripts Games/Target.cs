@@ -15,42 +15,58 @@ public class Target : MonoBehaviour
     private float posY;
     private bool isDestroy = false;
     private float currenScale;
-    private float randomPosX = 8.6f;
+    private float randomPosX = 23f;
     private float randomPosY;
     private bool tempPlayShoot;
+    public ParticleSystem dirtParticle;
+
 
 
     void Start()
     {
         
+        dirtParticle.Stop();
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         progressBar = GameObject.FindGameObjectWithTag("Aim").GetComponent<ProgressBar>();
+        transform.localScale = new Vector3(.6f, .6f, 1f);
         targetRb = GetComponent<Rigidbody2D>();
         RandomPosX();
-        speed = Random.Range(20f, 40f);
-        //posX = Random.Range(0.3f, 0.5f);
+        randomPosY = Random.Range(-3f, 6f);
+        speed = Random.Range(0.5f, 1f);
         posY = Random.Range(0.8f, 1.4f);
-        transform.position = new Vector3(randomPosX, -8f, -15);
-        targetRb.AddForce(new Vector2(-posX, posY) * speed, ForceMode2D.Impulse);
+        transform.position = new Vector3(randomPosX, randomPosY, -15);
+        if (randomPosY < 0)
+        {
+            targetRb.AddForce(new Vector2(-randomPosX, Random.Range(0, 6f)) * (speed + gameManager.level/3), ForceMode2D.Impulse);
+        } else
+        {
+            targetRb.AddForce(new Vector2(-randomPosX, Random.Range(0, -6f)) * (speed + gameManager.level/3), ForceMode2D.Impulse);
+        }
+
         tempPlayShoot = gameManager.playShoot;
-
-
+        Debug.Log("Level: " + gameManager.level + " Score: " + gameManager.score + "speed: " + speed);
     }
     private void Update()
     {
+
         ChahgeScalePlate();
         // Уничтожение тарелки, если прогрессбар заполнен и цель в прицеле
         if (progressBar.readyToShoot && progressBar.currentAmount >= 100)
         {  if(!tempPlayShoot)
             {
-                tempPlayShoot = true;
+                tempPlayShoot = true;               
                 gameManager.playShoot = true;
+                dirtParticle.Play();
+                
+                ChahgeScalePlate();
+
             }
             StartCoroutine(DelayAfterShoot());
         }
 
         if (gameManager.isDestroy)
         {
+            gameManager.score--;
             gameManager.isActiveFireBtn = true;
             Destroy(gameObject);
             
@@ -60,7 +76,7 @@ public class Target : MonoBehaviour
     //Изменение размера тарелки, для эффекта перспективы
     void ChahgeScalePlate()
     {
-        currenScale = platePrefab.transform.localScale.x * 0.99f;
+        currenScale = platePrefab.transform.localScale.x * 0.985f;
         platePrefab.transform.localScale = new Vector3(currenScale, currenScale, currenScale);
     }
 
@@ -77,9 +93,11 @@ public class Target : MonoBehaviour
 
     IEnumerator DelayAfterShoot()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.6f);
         gameManager.isActiveFireBtn = true;
-        isDestroy = true;
+        //isDestroy = true;
+        gameManager.score++;
         Destroy(gameObject);
+        Destroy(dirtParticle);
     }
 }

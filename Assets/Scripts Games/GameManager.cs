@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public Button fireBtn;
     public GameObject aim;
     public GameObject[] platePrefab;
+    public GameObject textGameOver;
     public ProgressBar progressBar;
     public bool isActiveFireBtn = true;
     public float multiplier;
@@ -18,21 +20,27 @@ public class GameManager : MonoBehaviour
     public bool playShoot = false;
 
     public Text scoreText;
-    private int score = 0;
+    public Text levelText;
+
+    public int score = 0;
+    public int level = 1;
+
+    public ParticleSystem dirtParticle;
 
     private void Start()
     {
         audioPlayer = GetComponent<AudioSource>();
         progressBar = GameObject.FindGameObjectWithTag("Aim").GetComponent<ProgressBar>();
-        
-
     }
     void Update()
     {
+        
         if (isActiveFireBtn)
         {
+
             fireBtn.gameObject.SetActive(true);
             StopAllCoroutines();
+            UpdateScore();
         }
         if (playShoot)
         {
@@ -48,7 +56,7 @@ public class GameManager : MonoBehaviour
         int prefabIndex = Random.Range(0, platePrefab.Length);
         Instantiate(platePrefab[prefabIndex], platePrefab[prefabIndex].transform.position, platePrefab[prefabIndex].transform.rotation);
         StartCoroutine(SetSpeedProgressBar());
-        StartCoroutine(Destroy5Sec());
+        StartCoroutine(Destroy7Sec());
         StartCoroutine(LastChanceDestroy());
         fireBtn.gameObject.SetActive(false);
         isActiveFireBtn = false;
@@ -73,10 +81,11 @@ public class GameManager : MonoBehaviour
     }
 
     //Уничтожение спустя 5 сек после запуска
-    IEnumerator Destroy5Sec()
+    IEnumerator Destroy7Sec()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(7f);
         isActiveFireBtn = true;
+        score--;
         isDestroy = true;
     }
 
@@ -90,13 +99,34 @@ public class GameManager : MonoBehaviour
         {
             isDestroy = true;
             isActiveFireBtn = true;
-            Debug.Log("chance Shoot!");
         }
     }
 
     public void UpdateScore()
     {
-        score ++;
-        scoreText.text = "Score: " + score;
+        
+        scoreText.text = "Score: " + score + "/5";
+        levelText.text = "Level: " + level;
+
+        if (score >= 5)
+        {
+            // Next Level
+            level++;
+            score = 0;
+        }
+        if (score < 0)
+        {
+            // Game Over
+            textGameOver.SetActive(true);
+            score = 0;
+            Invoke("BackToMenu", 1f);
+
+        }
     }
+
+    private void BackToMenu()
+    {
+        SceneManager.LoadScene("MenuScene");
+    }
+
 }
