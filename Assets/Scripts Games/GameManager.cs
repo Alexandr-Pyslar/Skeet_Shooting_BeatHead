@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -11,21 +10,23 @@ public class GameManager : MonoBehaviour
     public GameObject[] platePrefab;
     public GameObject textGameOver;
     public ProgressBar progressBar;
-    public bool isActiveFireBtn = true;
-    public float multiplier;
-    public bool isDestroy = false;
+    public ParticleSystem dirtParticle;
 
     private AudioSource audioPlayer;
     public AudioClip shootAudio;
-    public bool playShoot = false;
 
     public Text scoreText;
     public Text levelText;
 
+    public GameObject leftAlarm;
+    public GameObject rightAlarm;
+
+    public bool isActiveFireBtn = true;
+    public float multiplier;
+    public bool isDestroy = false;
+    public bool playShoot = false;
     public int score = 0;
     public int level = 1;
-
-    public ParticleSystem dirtParticle;
 
     private void Start()
     {
@@ -37,7 +38,6 @@ public class GameManager : MonoBehaviour
         
         if (isActiveFireBtn)
         {
-
             fireBtn.gameObject.SetActive(true);
             StopAllCoroutines();
             UpdateScore();
@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
             UpdateScore();
             audioPlayer.PlayOneShot(shootAudio, .5f);
             playShoot = false;
-
         }
     }
 
@@ -103,8 +102,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void UpdateScore()
-    {
-        
+    { 
         scoreText.text = "Score: " + score + "/5";
         levelText.text = "Level: " + level;
 

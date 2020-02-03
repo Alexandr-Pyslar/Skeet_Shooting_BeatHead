@@ -8,6 +8,7 @@ TagManager:
   - GameManager
   - Target
   - ProgressBar
+  - Dog
   layers:
   - Default
   - TransparentFX

@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CollisionTarget : MonoBehaviour
 {
     public bool isProgress = false;
-    //public GameObject platePrefab;
     public ProgressBar progressBar;
 
     void Start()
@@ -17,6 +14,11 @@ public class CollisionTarget : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Target"))
+        {
+            isProgress = true;
+        }
+
+        if (collision.CompareTag("Dog"))
         {
             isProgress = true;
         }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
@@ -20,6 +18,7 @@ public class MenuController : MonoBehaviour
     }
     private void Update()
     {
+        // Затухание звука, после клика на Play
         if (fadingVol && camVol >= 0)
         {
             camVol *= 0.8f;
@@ -50,13 +49,13 @@ public class MenuController : MonoBehaviour
 
     public void ExitGame()
     {
-
         Application.Quit();
     }
 
     public void StartGame()
     {
         fadingVol = true;
+        // Задержка выполнения для затухания звука
         Invoke("LoadGame", 0.3f);       
     }
 

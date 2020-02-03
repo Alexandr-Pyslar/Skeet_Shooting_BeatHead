@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+﻿ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
     private Vector3 lastPosition;
-    public float speed = 0.7f;
+    public float speed = 2f;
     private float limitX = 15f;
     private float limitY = 8.8f;
     void Update()
@@ -20,10 +20,5 @@ public class CameraController : MonoBehaviour
             Camera.main.transform.position = new Vector3(Mathf.Clamp(camPos.x, -limitX, limitX), Mathf.Clamp(camPos.y, -limitY, limitY), camPos.z);
             lastPosition = Input.mousePosition;
         }
-    }
-
-
-
-
-        
+    }  
 }
